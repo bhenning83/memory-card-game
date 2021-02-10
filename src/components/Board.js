@@ -4,6 +4,7 @@ import Card from './Card';
 function Board() {
   const [prevGuess, setPrevGuess] = useState();
   const [streak, setStreak] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [cards, setCards] = useState([
     {
       num: 1,
@@ -49,6 +50,9 @@ function Board() {
   }
 
   const loser = () => {
+    if (streak > highScore) {
+      setHighScore(streak);
+    }
     setStreak(0);
     setPrevGuess();
   }
@@ -67,13 +71,20 @@ function Board() {
   }, [prevGuess])
 
   shuffle(cards);
-  console.log(streak)
 
   return (
     <div>
-      {cards.map((value, idx) => {
-        return <Card key={idx} info={value} clicked={clicked} />
-      })}
+      <div>
+        High score: {highScore}
+      </div>
+      <div>
+        Current Streak: {streak}
+      </div>
+      <div>
+        {cards.map((value, idx) => {
+          return <Card key={idx} info={value} clicked={clicked} />
+        })}
+      </div>
     </div>
   );
 }
