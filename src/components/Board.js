@@ -1,32 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
+import Data from './Data'
 
 function Board() {
-  const [prevGuess, setPrevGuess] = useState();
+  const [prevGuess, setPrevGuess] = useState([]);
   const [streak, setStreak] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [cards, setCards] = useState([
-    {
-      num: 1,
-      idx: 0
-    },
-    {
-      num: 2,
-      idx: 1
-    },
-    {
-      num: 3,
-      idx: 2
-    },
-    {
-      num: 4,
-      idx: 3
-    },
-    {
-      num: 5,
-      idx: 4
-    },
-  ])
+  const [cards, setCards] = useState(Data())
 
 
   
@@ -54,20 +34,23 @@ function Board() {
       setHighScore(streak);
     }
     setStreak(0);
-    setPrevGuess();
+    setPrevGuess([]);
   }
 
   const clicked = (idx) => {
-    if (idx === prevGuess) {
+    if (prevGuess.includes(idx)) {
       loser() 
     } else {
-      setPrevGuess(idx)
+      setPrevGuess(prevGuess.concat(idx))
       setStreak(streak + 1);
     } 
   }
 
   useEffect(() => {
     shuffle(cards);
+    if (streak > highScore) {
+      setHighScore(streak);
+    }
   }, [prevGuess])
 
   shuffle(cards);
