@@ -12,6 +12,7 @@ const Card = (props) => {
       <div className='flip-card-inner'>
         <div className='flip-card-front'>
           <button 
+            id={props.info.idx}
             onClick={()=>props.clicked(props.info.idx)}>
             <img src={image}></img>
             {props.info.team}

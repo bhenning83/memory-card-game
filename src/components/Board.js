@@ -10,8 +10,9 @@ function Board() {
   let liveCards = [];
   
   const shuffle = () => {
-    let copy = [...cards]
-    let currentIndex = copy.length, temporaryValue, randomIndex;
+    let copy = [...cards];
+    let temporaryValue, randomIndex;
+    let currentIndex = copy.length;
   
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -29,7 +30,7 @@ function Board() {
     return copy;
   }
 
-  const loser = () => {
+  const loser = (idx) => {
     if (streak > highScore) {
       setHighScore(streak);
     }
@@ -39,7 +40,7 @@ function Board() {
 
   const clicked = (idx) => {
     if (prevGuess.includes(idx)) {
-      loser() 
+      loser(idx) 
     } else {
       setPrevGuess(prevGuess.concat(idx));
       setStreak(streak + 1);
@@ -60,7 +61,7 @@ function Board() {
     if (prevGuess.length > 0) {
       timer = setTimeout(() => {
         setCards(shuffle())
-      }, 1000)
+      }, 1000);
       kards.forEach(kard => {
         kard.classList.add('active');
       })
@@ -68,7 +69,7 @@ function Board() {
         kards.forEach(kard => {
           kard.classList.remove('active')
         })
-      }, 1000)
+      }, 1000);
     }
 
     return () => {
