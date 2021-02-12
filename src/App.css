@@ -1,38 +1,89 @@
-.App {
+:root {
+  --oxford-blue: hsla(215, 61%, 16%, 1);
+  --bittersweet: hsla(6, 92%, 67%, 1);
+  --light-gray: hsla(174, 11%, 82%, 1);
+  --grullo: hsla(29, 17%, 64%, 1);
+  --white: hsla(0, 0%, 100%, 1);
+}
+body {
+  background: var(--oxford-blue);
+  color: white;
+}
+header {
   text-align: center;
+  height: 50px;
+  margin-bottom: 50px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flip-card button {
+  width: 250px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  padding: 10px;
+  background: var(--light-gray);
+  font-size: 1.3rem;
+}
+button:focus {
+  outline: none;
+}
+.cards-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+img {
+  max-width: 200px;
+}
+.score-box {
+  width: 50vw;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  margin: 75px auto;
+}
+.flip-card {
+  background-color: transparent;
+  width: 250px;
+  height: 250px;
+  perspective: 1000px; 
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  transform: rotateY(180deg);
+  /* border: 1px solid white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

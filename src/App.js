@@ -1,10 +1,14 @@
 import './App.css';
 import React from 'react';
 import Board from './components/Board';
+import Header from './components/Header';
 
 function App() {
   return (
-    <Board />
+    <div>
+      <Header />
+      <Board />
+    </div>
   );
 }
 
